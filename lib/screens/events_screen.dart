@@ -54,7 +54,7 @@ class _EventsScreenState extends State<EventsScreen> {
 
   Widget _buildHeroSection(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final heroHeight = size.height < 800 ? 800.0 : size.height;
+    final heroHeight = size.width < 600 ? 380.0 : (size.height < 800 ? 800.0 : size.height);
 
     return SizedBox(
       height: heroHeight,
@@ -91,6 +91,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(height: size.width < 600 ? 64 : 0),
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
@@ -101,7 +102,7 @@ class _EventsScreenState extends State<EventsScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: size.width < 600 ? 12 : 24),
                     ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 1000), // max-w-4xl
                       child: Text(
@@ -110,7 +111,7 @@ class _EventsScreenState extends State<EventsScreen> {
                         style: GoogleFonts.inter(color: const Color(0xFFD0C5AF).withOpacity(0.8), fontSize: size.width > 500 ? 18 : 14),
                       ),
                     ),
-                    const SizedBox(height: 48),
+                    SizedBox(height: size.width < 600 ? 24 : 48),
                     // Search & Filters Cluster
                     ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 896), // max-w-4xl
@@ -161,19 +162,6 @@ class _EventsScreenState extends State<EventsScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 24),
-                          // Filters
-                          Wrap(
-                            spacing: 16,
-                            runSpacing: 16,
-                            alignment: WrapAlignment.center,
-                            children: [
-                              _buildFilterDropdown('Select City', Icons.location_on),
-                              _buildFilterDropdown('Date', Icons.calendar_today),
-                              _buildFilterDropdown('Category', Icons.category),
-                              _buildFilterDropdown('Price', Icons.payments),
-                            ],
-                          ),
                         ],
                       ),
                     ),
@@ -187,26 +175,7 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
-  Widget _buildFilterDropdown(String hint, IconData icon) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1F1B13).withOpacity(0.5),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
-        borderRadius: BorderRadius.circular(32),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: const Color(0xFFD4AF37), size: 20),
-          const SizedBox(width: 8),
-          Text(hint, style: GoogleFonts.inter(color: const Color(0xFFEAE1D4), fontWeight: FontWeight.w600)),
-          const SizedBox(width: 8),
-          const Icon(Icons.expand_more, color: Color(0xFF99907C)),
-        ],
-      ),
-    );
-  }
+
 
   Widget _buildFeaturedEvent() {
     return _buildSectionContainer(

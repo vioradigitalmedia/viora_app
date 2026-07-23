@@ -72,7 +72,7 @@ class HeroSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.height * 0.85,
+      height: size.width < 600 ? 380.0 : size.height * 0.85,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -103,7 +103,7 @@ class HeroSection extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 60),
+                  SizedBox(height: size.width < 600 ? 64 : 60),
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
@@ -119,7 +119,7 @@ class HeroSection extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: size.width < 600 ? 12 : 24),
                   Text(
                     'Curated premium experiences from the world\'s most exclusive venues. Find your next unforgettable moment.',
                     textAlign: TextAlign.center,
@@ -128,7 +128,7 @@ class HeroSection extends StatelessWidget {
                       color: const Color(0xFFD0C5AF).withOpacity(0.9),
                     ),
                   ),
-                  const SizedBox(height: 48),
+                  SizedBox(height: size.width < 600 ? 24 : 48),
                   // Glass Search Bar
                   Container(
                     constraints: const BoxConstraints(maxWidth: 800),

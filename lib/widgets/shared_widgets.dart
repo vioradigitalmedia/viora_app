@@ -179,7 +179,7 @@ class FooterSection extends StatelessWidget {
                       
                       // Company
                       SizedBox(
-                        width: MediaQuery.of(context).size.width < 600 ? double.infinity : 200,
+                        width: MediaQuery.of(context).size.width < 600 ? (MediaQuery.of(context).size.width - 88) / 2 : 200,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -195,7 +195,7 @@ class FooterSection extends StatelessWidget {
                       
                       // Support
                       SizedBox(
-                        width: MediaQuery.of(context).size.width < 600 ? double.infinity : 200,
+                        width: MediaQuery.of(context).size.width < 600 ? (MediaQuery.of(context).size.width - 88) / 2 : 200,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
