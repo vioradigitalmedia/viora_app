@@ -116,30 +116,49 @@ class _EventsScreenState extends State<EventsScreen> {
                       constraints: const BoxConstraints(maxWidth: 896), // max-w-4xl
                       child: Column(
                         children: [
-                          // Search Bar
+                          // Glass Search Bar
                           Container(
-                            height: 64,
+                            constraints: const BoxConstraints(maxWidth: 800),
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF231F17).withOpacity(0.6),
-                              borderRadius: BorderRadius.circular(32),
+                              color: Colors.white.withOpacity(0.05),
+                              borderRadius: BorderRadius.circular(40),
                               border: Border.all(color: Colors.white.withOpacity(0.1)),
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
-                            child: Row(
-                              children: [
-                                const Icon(Icons.search, color: Color(0xFFD4AF37)),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: TextField(
-                                    style: GoogleFonts.inter(color: const Color(0xFFEAE1D4)),
-                                    decoration: InputDecoration(
-                                      hintText: 'Search events, artists, venues...',
-                                      hintStyle: GoogleFonts.inter(color: const Color(0xFF99907C)),
-                                      border: InputBorder.none,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(40),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                                child: Row(
+                                  children: [
+                                    const SizedBox(width: 16),
+                                    const Icon(Icons.search, color: Color(0xFFD4AF37)),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: TextField(
+                                        style: GoogleFonts.inter(color: const Color(0xFFEAE1D4)),
+                                        decoration: InputDecoration(
+                                          hintText: 'Search events, artists, venues...',
+                                          hintStyle: GoogleFonts.inter(color: const Color(0xFF99907C)),
+                                          border: InputBorder.none,
+                                          isDense: true,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color(0xFFD4AF37),
+                                        foregroundColor: const Color(0xFF241A00),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                                        padding: EdgeInsets.symmetric(horizontal: size.width > 500 ? 32 : 16, vertical: 20),
+                                        elevation: 0,
+                                      ),
+                                      child: Text('Search', style: GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: size.width > 500 ? 14 : 12)),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                           const SizedBox(height: 24),
