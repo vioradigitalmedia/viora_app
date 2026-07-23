@@ -26,27 +26,48 @@ class SharedHeader extends StatelessWidget implements PreferredSizeWidget {
             child: LayoutBuilder(
               builder: (context, constraints) {
                 final isMobile = constraints.maxWidth <= 500;
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                return Stack(
+                  alignment: Alignment.center,
                   children: [
-                    if (!isMobile)
-                      GestureDetector(
-                        onTap: () {
-                          if (activeTab != 'Discover') {
-                            Navigator.of(context).popUntil((route) => route.isFirst);
-                          }
-                        },
-                        child: Text('Viora', style: GoogleFonts.playfairDisplay(color: Theme.of(context).colorScheme.primary, fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: -1)),
-                      ),
-                    // Navigation Links
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        if (!isMobile)
+                          GestureDetector(
+                            onTap: () {
+                              if (activeTab != 'Discover') {
+                                Navigator.of(context).popUntil((route) => route.isFirst);
+                              }
+                            },
+                            child: Text('Viora', style: GoogleFonts.playfairDisplay(color: Theme.of(context).colorScheme.primary, fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: -1)),
+                          )
+                        else
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: FaIcon(FontAwesomeIcons.locationDot, color: Color(0xFFD4AF37), size: 20),
+                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (!isMobile)
+                              const Padding(
+                                padding: EdgeInsets.only(right: 16.0),
+                                child: FaIcon(FontAwesomeIcons.locationDot, color: Color(0xFFD4AF37), size: 18),
+                              ),
+                            IconButton(icon: const Icon(Icons.person_outline, color: Color(0xFFD0C5AF)), onPressed: () {}),
+                          ],
+                        ),
+                      ],
+                    ),
+                    // Navigation Links perfectly centered
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         _buildNavLink(context, 'Discover', activeTab == 'Discover'),
                         SizedBox(width: isMobile ? 24 : 32),
                         _buildNavLink(context, 'Events', activeTab == 'Events'),
                       ],
                     ),
-                    IconButton(icon: const Icon(Icons.person_outline, color: Color(0xFFD0C5AF)), onPressed: () {}),
                   ],
                 );
               },

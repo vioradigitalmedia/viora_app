@@ -115,7 +115,7 @@ class HeroSection extends StatelessWidget {
                       ),
                       children: const [
                         TextSpan(text: 'Discover Amazing '),
-                        TextSpan(text: 'Events', style: TextStyle(color: Color(0xFFD4AF37), fontStyle: FontStyle.italic)),
+                        TextSpan(text: 'Experiences', style: TextStyle(color: Color(0xFFD4AF37), fontStyle: FontStyle.italic)),
                       ],
                     ),
                   ),

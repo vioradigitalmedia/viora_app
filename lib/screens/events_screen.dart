@@ -97,7 +97,7 @@ class _EventsScreenState extends State<EventsScreen> {
                         style: GoogleFonts.playfairDisplay(color: const Color(0xFFEAE1D4), fontSize: size.width > 800 ? 64 : (size.width > 500 ? 48 : 36), fontWeight: FontWeight.bold),
                         children: [
                           const TextSpan(text: 'Find Your Next '),
-                          TextSpan(text: 'Experience', style: GoogleFonts.playfairDisplay(color: const Color(0xFFD4AF37), fontStyle: FontStyle.italic)),
+                          TextSpan(text: 'Event', style: GoogleFonts.playfairDisplay(color: const Color(0xFFD4AF37), fontStyle: FontStyle.italic)),
                         ],
                       ),
                     ),
