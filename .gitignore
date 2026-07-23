@@ -44,15 +44,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Vercel related
-.vercel/
 
-
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.packages
-build/
-.pub-cache/
-.idea/
-.vscode/
