@@ -96,17 +96,16 @@ class _EventsScreenState extends State<EventsScreen> {
                       text: TextSpan(
                         style: GoogleFonts.playfairDisplay(color: const Color(0xFFEAE1D4), fontSize: size.width > 800 ? 64 : (size.width > 500 ? 48 : 36), fontWeight: FontWeight.bold),
                         children: [
-                          const TextSpan(text: 'Discover '),
-                          TextSpan(text: 'Extraordinary', style: GoogleFonts.playfairDisplay(color: const Color(0xFFD4AF37), fontStyle: FontStyle.italic)),
-                          const TextSpan(text: ' Events'),
+                          const TextSpan(text: 'Find Your Next '),
+                          TextSpan(text: 'Experience', style: GoogleFonts.playfairDisplay(color: const Color(0xFFD4AF37), fontStyle: FontStyle.italic)),
                         ],
                       ),
                     ),
                     const SizedBox(height: 24),
                     ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 672), // max-w-2xl
+                      constraints: const BoxConstraints(maxWidth: 1000), // max-w-4xl
                       child: Text(
-                        'Find concerts, film festivals, workshops, comedy shows, conferences, and unforgettable experiences happening around you.',
+                        'Concerts, festivals, workshops, shows, and unforgettable experiences—all in one place.',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(color: const Color(0xFFD0C5AF).withOpacity(0.8), fontSize: size.width > 500 ? 18 : 14),
                       ),
@@ -137,10 +136,10 @@ class _EventsScreenState extends State<EventsScreen> {
                                     const SizedBox(width: 16),
                                     Expanded(
                                       child: TextField(
-                                        style: GoogleFonts.inter(color: const Color(0xFFEAE1D4)),
+                                        style: const TextStyle(color: Color(0xFFEAE1D4)),
                                         decoration: InputDecoration(
-                                          hintText: 'Search events, artists, venues...',
-                                          hintStyle: GoogleFonts.inter(color: const Color(0xFF99907C)),
+                                          hintText: 'Search for events, venues, or categories...',
+                                          hintStyle: TextStyle(color: const Color(0xFFD0C5AF).withOpacity(0.6)),
                                           border: InputBorder.none,
                                           isDense: true,
                                         ),

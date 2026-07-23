@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../screens/events_screen.dart';
 
 class SharedHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -9,67 +10,46 @@ class SharedHeader extends StatelessWidget implements PreferredSizeWidget {
   const SharedHeader({super.key, required this.activeTab});
 
   @override
-  Size get preferredSize => const Size(double.infinity, 80);
+  Size get preferredSize => const Size(double.infinity, 64);
 
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
-      preferredSize: const Size(double.infinity, 80),
+      preferredSize: const Size(double.infinity, 64),
       child: ClipRRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
           child: Container(
             color: const Color(0xFF0A0A0A).withOpacity(0.7),
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    if (activeTab != 'Discover') {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
-                    }
-                  },
-                  child: Text('Viora', style: GoogleFonts.playfairDisplay(color: Theme.of(context).colorScheme.primary, fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: -1)),
-                ),
-                // Navigation Links (Hidden on small screens)
-                if (MediaQuery.of(context).size.width > 800)
-                  Row(
-                    children: [
-                      _buildNavLink(context, 'Discover', activeTab == 'Discover'),
-                      const SizedBox(width: 32),
-                      _buildNavLink(context, 'Events', activeTab == 'Events'),
-                    ],
-                  ),
-                Row(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isMobile = constraints.maxWidth <= 500;
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(icon: const Icon(Icons.person_outline, color: Color(0xFFD0C5AF)), onPressed: () {}),
-                    if (MediaQuery.of(context).size.width <= 800)
-                      PopupMenuButton<String>(
-                        icon: const Icon(Icons.menu, color: Color(0xFFD0C5AF)),
-                        color: const Color(0xFF1A1814),
-                        itemBuilder: (context) => [
-                          PopupMenuItem(
-                            value: 'Discover',
-                            child: Text('Discover', style: GoogleFonts.inter(color: activeTab == 'Discover' ? const Color(0xFFD4AF37) : const Color(0xFFD0C5AF))),
-                          ),
-                          PopupMenuItem(
-                            value: 'Events',
-                            child: Text('Events', style: GoogleFonts.inter(color: activeTab == 'Events' ? const Color(0xFFD4AF37) : const Color(0xFFD0C5AF))),
-                          ),
-                        ],
-                        onSelected: (value) {
-                          if (value == 'Events' && activeTab != 'Events') {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const EventsScreen()));
-                          } else if (value == 'Discover' && activeTab != 'Discover') {
+                    if (!isMobile)
+                      GestureDetector(
+                        onTap: () {
+                          if (activeTab != 'Discover') {
                             Navigator.of(context).popUntil((route) => route.isFirst);
                           }
                         },
+                        child: Text('Viora', style: GoogleFonts.playfairDisplay(color: Theme.of(context).colorScheme.primary, fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: -1)),
                       ),
+                    // Navigation Links
+                    Row(
+                      children: [
+                        _buildNavLink(context, 'Discover', activeTab == 'Discover'),
+                        SizedBox(width: isMobile ? 24 : 32),
+                        _buildNavLink(context, 'Events', activeTab == 'Events'),
+                      ],
+                    ),
+                    IconButton(icon: const Icon(Icons.person_outline, color: Color(0xFFD0C5AF)), onPressed: () {}),
                   ],
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),
@@ -77,7 +57,7 @@ class SharedHeader extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget _buildNavLink(BuildContext context, String text, bool isActive) {
+  Widget _buildNavLink(BuildContext context, String text, bool isActive, {Widget? iconWidget}) {
     return GestureDetector(
       onTap: () {
         if (!isActive) {
@@ -95,14 +75,23 @@ class SharedHeader extends StatelessWidget implements PreferredSizeWidget {
             border: Border(bottom: BorderSide(color: Color(0xFFD4AF37), width: 2))
           ) : null,
           padding: const EdgeInsets.only(bottom: 4),
-          child: Text(
-            text,
-            style: GoogleFonts.inter(
-              color: isActive ? const Color(0xFFD4AF37) : const Color(0xFFD0C5AF),
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-              letterSpacing: 0.5,
-            ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (iconWidget != null) ...[
+                iconWidget,
+                const SizedBox(width: 6),
+              ],
+              Text(
+                text,
+                style: GoogleFonts.inter(
+                  color: isActive ? const Color(0xFFD4AF37) : const Color(0xFFD0C5AF),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ],
           ),
         ),
       ),
