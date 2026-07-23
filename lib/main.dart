@@ -108,7 +108,7 @@ class HeroSection extends StatelessWidget {
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       style: GoogleFonts.playfairDisplay(
-                        fontSize: size.width > 800 ? 64 : 48,
+                        fontSize: size.width > 800 ? 64 : (size.width > 500 ? 48 : 36),
                         color: const Color(0xFFEAE1D4),
                         fontWeight: FontWeight.bold,
                         shadows: [Shadow(color: Colors.black.withOpacity(0.5), blurRadius: 10)],
@@ -164,10 +164,10 @@ class HeroSection extends StatelessWidget {
                                 backgroundColor: const Color(0xFFD4AF37),
                                 foregroundColor: const Color(0xFF241A00),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+                                padding: EdgeInsets.symmetric(horizontal: size.width > 500 ? 32 : 16, vertical: 20),
                                 elevation: 0,
                               ),
-                              child: Text('Search', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+                              child: Text('Search', style: GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: size.width > 500 ? 14 : 12)),
                             ),
                           ],
                         ),
@@ -361,11 +361,13 @@ class FeaturedExperiencesSection extends StatelessWidget {
   }
 
   Widget _buildMainFeaturedCard() {
-    return Container(
-      height: 600,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.05)),
+    return Builder(
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.width > 800 ? 600 : 400,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.white.withOpacity(0.05)),
         image: const DecorationImage(
           image: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuDOB2lrChkZaqUwAXLf6c_m4TcdYxzl7gIuWi9MH3FCvWLhcdTsAPET_E268mCyFq0lliyeU-iQAJzBiTDlddnttcvFJlx8cclm-iZjAzU_wxrK06N_LQB1krpxpdYl37Cqda8rsB8guFnQ-t9bDCo7xkqtyTWjdZrjoPVjYWAozYxH0G2CIzVYEcZdyc51XPn7GbmQBpj8aQmjAr7Rnnr7PhHVREMmD2im2djiUIZUhefjRruTH5vlvg'),
           fit: BoxFit.cover,
@@ -452,6 +454,8 @@ class FeaturedExperiencesSection extends StatelessWidget {
         ),
       ),
     );
+      }
+    );
   }
 
   Widget _buildSideCard(String imageUrl, String tag, String title, String price) {
@@ -535,12 +539,12 @@ class CTASection extends StatelessWidget {
               filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
               child: Column(
                 children: [
-                  Text('Experience More.', style: GoogleFonts.playfairDisplay(color: const Color(0xFFD4AF37), fontSize: 48, fontWeight: FontWeight.bold, letterSpacing: -1)),
+                  Text('Experience More.', style: GoogleFonts.playfairDisplay(color: const Color(0xFFD4AF37), fontSize: MediaQuery.of(context).size.width > 500 ? 48 : 32, fontWeight: FontWeight.bold, letterSpacing: -1)),
                   const SizedBox(height: 24),
                   Text(
                     'Join Viora Black for exclusive early access, concierge booking services, and complimentary lounge entry to the world\'s finest venues.',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(color: const Color(0xFFD0C5AF), fontSize: 18),
+                    style: GoogleFonts.inter(color: const Color(0xFFD0C5AF), fontSize: MediaQuery.of(context).size.width > 500 ? 18 : 14),
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(

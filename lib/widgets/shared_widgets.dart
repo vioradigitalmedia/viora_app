@@ -45,6 +45,28 @@ class SharedHeader extends StatelessWidget implements PreferredSizeWidget {
                 Row(
                   children: [
                     IconButton(icon: const Icon(Icons.person_outline, color: Color(0xFFD0C5AF)), onPressed: () {}),
+                    if (MediaQuery.of(context).size.width <= 800)
+                      PopupMenuButton<String>(
+                        icon: const Icon(Icons.menu, color: Color(0xFFD0C5AF)),
+                        color: const Color(0xFF1A1814),
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            value: 'Discover',
+                            child: Text('Discover', style: GoogleFonts.inter(color: activeTab == 'Discover' ? const Color(0xFFD4AF37) : const Color(0xFFD0C5AF))),
+                          ),
+                          PopupMenuItem(
+                            value: 'Events',
+                            child: Text('Events', style: GoogleFonts.inter(color: activeTab == 'Events' ? const Color(0xFFD4AF37) : const Color(0xFFD0C5AF))),
+                          ),
+                        ],
+                        onSelected: (value) {
+                          if (value == 'Events' && activeTab != 'Events') {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const EventsScreen()));
+                          } else if (value == 'Discover' && activeTab != 'Discover') {
+                            Navigator.of(context).popUntil((route) => route.isFirst);
+                          }
+                        },
+                      ),
                   ],
                 ),
               ],
@@ -114,7 +136,7 @@ class FooterSection extends StatelessWidget {
                     children: [
                       // Brand
                       SizedBox(
-                        width: 250,
+                        width: MediaQuery.of(context).size.width < 600 ? double.infinity : 250,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -147,7 +169,7 @@ class FooterSection extends StatelessWidget {
                       
                       // Company
                       SizedBox(
-                        width: 200,
+                        width: MediaQuery.of(context).size.width < 600 ? double.infinity : 200,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -163,7 +185,7 @@ class FooterSection extends StatelessWidget {
                       
                       // Support
                       SizedBox(
-                        width: 200,
+                        width: MediaQuery.of(context).size.width < 600 ? double.infinity : 200,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

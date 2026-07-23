@@ -93,7 +93,7 @@ class _EventsScreenState extends State<EventsScreen> {
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        style: GoogleFonts.playfairDisplay(color: const Color(0xFFEAE1D4), fontSize: size.width > 800 ? 64 : 48, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.playfairDisplay(color: const Color(0xFFEAE1D4), fontSize: size.width > 800 ? 64 : (size.width > 500 ? 48 : 36), fontWeight: FontWeight.bold),
                         children: [
                           const TextSpan(text: 'Discover '),
                           TextSpan(text: 'Extraordinary', style: GoogleFonts.playfairDisplay(color: const Color(0xFFD4AF37), fontStyle: FontStyle.italic)),
@@ -107,7 +107,7 @@ class _EventsScreenState extends State<EventsScreen> {
                       child: Text(
                         'Find concerts, film festivals, workshops, comedy shows, conferences, and unforgettable experiences happening around you.',
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(color: const Color(0xFFD0C5AF).withOpacity(0.8), fontSize: 18),
+                        style: GoogleFonts.inter(color: const Color(0xFFD0C5AF).withOpacity(0.8), fontSize: size.width > 500 ? 18 : 14),
                       ),
                     ),
                     const SizedBox(height: 48),
@@ -646,15 +646,20 @@ class _EventsScreenState extends State<EventsScreen> {
   }
 
   Widget _buildSectionHeader(String title) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title, style: GoogleFonts.playfairDisplay(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
-        TextButton(
-          onPressed: () {},
-          child: Text('See All', style: GoogleFonts.inter(color: const Color(0xFFD4AF37), fontWeight: FontWeight.bold)),
-        ),
-      ],
+    return Builder(
+      builder: (context) {
+        final isMobile = MediaQuery.of(context).size.width < 500;
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(child: Text(title, style: GoogleFonts.playfairDisplay(color: Colors.white, fontSize: isMobile ? 22 : 28, fontWeight: FontWeight.bold))),
+            TextButton(
+              onPressed: () {},
+              child: Text('See All', style: GoogleFonts.inter(color: const Color(0xFFD4AF37), fontWeight: FontWeight.bold, fontSize: isMobile ? 12 : 14)),
+            ),
+          ],
+        );
+      }
     );
   }
 }
