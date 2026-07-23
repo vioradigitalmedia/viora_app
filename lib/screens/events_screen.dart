@@ -180,7 +180,7 @@ class _EventsScreenState extends State<EventsScreen> {
   Widget _buildFeaturedEvent() {
     return _buildSectionContainer(
       child: Container(
-        height: 400,
+        constraints: const BoxConstraints(minHeight: 400),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: const DecorationImage(
@@ -197,7 +197,7 @@ class _EventsScreenState extends State<EventsScreen> {
               end: Alignment.topRight,
             ),
           ),
-          padding: const EdgeInsets.all(40),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width < 600 ? 24 : 40),
           alignment: Alignment.bottomLeft,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -212,26 +212,39 @@ class _EventsScreenState extends State<EventsScreen> {
                 child: Text('FEATURED', style: GoogleFonts.inter(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12, letterSpacing: 1.5)),
               ),
               const SizedBox(height: 16),
-              Text('Tomorrowland 2024', style: GoogleFonts.playfairDisplay(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
+              Text('Tomorrowland 2024', style: GoogleFonts.playfairDisplay(color: Colors.white, fontSize: MediaQuery.of(context).size.width < 600 ? 28 : 40, fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
-              Row(
+              Wrap(
+                spacing: 24,
+                runSpacing: 12,
                 children: [
-                  const Icon(Icons.calendar_today, color: Color(0xFFD4AF37), size: 16),
-                  const SizedBox(width: 8),
-                  Text('Jul 19 - Jul 28, 2024', style: GoogleFonts.inter(color: const Color(0xFFD0C5AF))),
-                  const SizedBox(width: 24),
-                  const Icon(Icons.location_on, color: Color(0xFFD4AF37), size: 16),
-                  const SizedBox(width: 8),
-                  Text('Boom, Belgium', style: GoogleFonts.inter(color: const Color(0xFFD0C5AF))),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.calendar_today, color: Color(0xFFD4AF37), size: 16),
+                      const SizedBox(width: 8),
+                      Text('Jul 19 - Jul 28, 2024', style: GoogleFonts.inter(color: const Color(0xFFD0C5AF))),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.location_on, color: Color(0xFFD4AF37), size: 16),
+                      const SizedBox(width: 8),
+                      Text('Boom, Belgium', style: GoogleFonts.inter(color: const Color(0xFFD0C5AF))),
+                    ],
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
               Text('Experience the magic of the world\'s largest dance music festival.', style: GoogleFonts.inter(color: Colors.white, fontSize: 16)),
               const SizedBox(height: 24),
-              Row(
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 32,
+                runSpacing: 16,
                 children: [
                   Text('From \$350', style: GoogleFonts.inter(color: const Color(0xFFD4AF37), fontSize: 20, fontWeight: FontWeight.w600)),
-                  const SizedBox(width: 32),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -269,9 +282,10 @@ class _EventsScreenState extends State<EventsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.end,
+            runSpacing: 16,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -299,6 +313,7 @@ class _EventsScreenState extends State<EventsScreen> {
               InkWell(
                 onTap: () {},
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       'See All',

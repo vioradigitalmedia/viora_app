@@ -124,7 +124,7 @@ class HeroSection extends StatelessWidget {
                     'Curated premium experiences from the world\'s most exclusive venues. Find your next unforgettable moment.',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
-                      fontSize: 18,
+                      fontSize: size.width > 500 ? 18 : 14,
                       color: const Color(0xFFD0C5AF).withOpacity(0.9),
                     ),
                   ),
@@ -206,9 +206,10 @@ class CategoriesSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.end,
+                runSpacing: 16,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -219,6 +220,7 @@ class CategoriesSection extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text('See All', style: GoogleFonts.inter(color: const Color(0xFFD4AF37), fontWeight: FontWeight.w600)),
                       const SizedBox(width: 4),
@@ -279,20 +281,22 @@ class FeaturedExperiencesSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.end,
+                runSpacing: 16,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Featured Experiences', style: GoogleFonts.playfairDisplay(fontSize: 32, fontWeight: FontWeight.w600, color: const Color(0xFFEAE1D4))),
+                      Text('Featured Experiences', style: GoogleFonts.playfairDisplay(fontSize: MediaQuery.of(context).size.width < 600 ? 28 : 32, fontWeight: FontWeight.w600, color: const Color(0xFFEAE1D4))),
                       const SizedBox(height: 8),
                       Text('Hand-picked events for discerning tastes.', style: GoogleFonts.inter(color: const Color(0xFFD0C5AF), fontSize: 16)),
                     ],
                   ),
                   if (isDesktop)
                     Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('Browse All Events', style: GoogleFonts.inter(color: const Color(0xFFD4AF37), fontWeight: FontWeight.w600)),
                         const SizedBox(width: 4),
@@ -364,7 +368,7 @@ class FeaturedExperiencesSection extends StatelessWidget {
     return Builder(
       builder: (context) {
         return Container(
-          height: MediaQuery.of(context).size.width > 800 ? 600 : 400,
+          constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.width > 800 ? 600 : 400),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.white.withOpacity(0.05)),
@@ -386,7 +390,7 @@ class FeaturedExperiencesSection extends StatelessWidget {
             ],
           ),
         ),
-        padding: const EdgeInsets.all(40),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width < 600 ? 24 : 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -421,7 +425,7 @@ class FeaturedExperiencesSection extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('The Grand Philharmonic:\nMoonlight Symphony', style: GoogleFonts.playfairDisplay(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold, height: 1.1)),
+                Text('The Grand Philharmonic:\nMoonlight Symphony', style: GoogleFonts.playfairDisplay(color: Colors.white, fontSize: MediaQuery.of(context).size.width < 600 ? 28 : 40, fontWeight: FontWeight.bold, height: 1.1)),
                 const SizedBox(height: 24),
                 Wrap(
                   spacing: 24,
